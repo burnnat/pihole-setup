@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  ddclient:
+    build: docker
+    container_name: ddclient
+    restart: unless-stopped
+    environment:
+      - TZ=America/Detroit
+    volumes:
+      - ./config/ddclient.conf:/etc/ddclient.conf

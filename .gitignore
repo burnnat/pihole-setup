@@ -1,2 +1,3 @@
 .env
+/ddclient/config/ddclient.conf
 /pihole/config/dhcp.leases
