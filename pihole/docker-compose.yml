@@ -2,7 +2,19 @@ version: "3"
 
 services:
   pihole:
-    image: pihole/pihole
+    build:
+      context: https://github.com/pi-hole/docker-pi-hole.git#v5.2.1
+      args:
+        # See build.yml in docker-pi-hole repo for required args.
+        PIHOLE_VERSION: 5.2.1
+        PIHOLE_BASE: multiarch/debian-debootstrap:armel-${DEBIAN_VERSION:-buster}-slim
+        PIHOLE_ARCH: armel
+        S6_ARCH: arm
+        S6_VERSION: v1.22.1.0
+        NAME: pihole/pihole
+        MAINTAINER: adam@diginc.us
+        PHP_ENV_CONFIG: /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
+        PHP_ERROR_LOG: /var/log/lighttpd/error.log
     container_name: pihole
     restart: unless-stopped
     network_mode: host
